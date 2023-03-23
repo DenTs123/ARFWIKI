@@ -1,0 +1,27 @@
+{% extends "blog/base.html" %}
+
+{% block title %}Поиск{% endblock %}
+
+{% block content %}
+  {% if Запрос %}
+    <h1>Посты имеющие "{{ Запрос }}"</h1>
+    <h3>
+      {% with results.count as total_results %}
+	Найдено {{ total_results }} результатов
+      {% endwith %}
+    </h3>
+    {% for post in results %}
+      <h4><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
+    {% empty %}
+      <p>К сожалению по вашему запросу ничего не найдено<br>
+      Возможно если вы укажете более точную информацию мы всё-таки что-то для вас найдём</p>
+    {% endfor %}
+    <p><a href="{% url 'blog:post_search' %}">Искать снова</a></p>
+  {% else %}
+    <h1>Найти пост</h1>
+    <form action="." method="get">
+      {{ form.as_p }}
+      <input type="submit" value="Найти">
+    </form>
+  {% endif %}
+{% endblock %}

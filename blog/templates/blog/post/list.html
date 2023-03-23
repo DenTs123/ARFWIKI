@@ -1,0 +1,28 @@
+{% extends "blog/base.html" %}
+{% load blog_tags %}
+{% block title %}ARF WIKI{% endblock %}
+
+{% block content %}
+  <h1>ARF WIKI</h1>
+  {% if tag %}
+    <h2>Посты с тегом "{{ tag.name }}"</h2>
+  {% endif %}
+  {% for post in posts %}
+    <h2>
+      <a href="{{ post.get_absolute_url }}">
+       {{ post.title }}
+      </a>
+    </h2>
+    <p class="tags">
+      Теги:
+      {% for tag in post.tags.all %}
+        {{ tag.name }}
+      {% endfor %}
+    </p>
+</p>
+    <p class="date">
+      Опубликовано {{ post.publish }} | Автор: {{ post.author }}
+    </p>
+  {% endfor %}
+  {% include "../pagination.html" with page=posts %}
+{% endblock %}

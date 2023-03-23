@@ -1,0 +1,37 @@
+{% load blog_tags %}
+{% load static %}
+<html>
+<head>
+ <title>{% block title %}{% endblock %}</title>
+ <link href="{% static 'css/blog.css' %}" rel="stylesheet">
+ <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}">
+</head>
+<body>
+ <div id="content">
+  {% block content %}
+      {% endblock %}
+    </div>
+ <div id="sidebar">
+  <h2>ARF WIKI</h2>
+  <p>Добро пожаловать на ARF WIKI!<br>
+      Здесь мы делаем карты, статьи, проводим конкурсы и делаем опросы!<br><br>
+      Сейчас на сайте {% total_posts %} постов</p>
+  <p><a href="https://t.me/ARFSupport">Добавить статью</a><br>
+  <br>
+      <a href="{% url 'blog:post_search' %}">Поисковик</a><br>
+      <br>
+  <a href="https://t.me/arfdany">Подписаться на наш канал</a><br>
+  <h3>Последние посты</h3>
+  {% show_latest_posts 3 %}
+     <h3>Больше всего комментариев</h3>
+    {% get_most_commented_posts as most_commented_posts %}
+    <ul>
+      {% for post in most_commented_posts %}
+      <li>
+        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+      </li>
+      {% endfor %}
+</ul>
+</div>
+</body>
+</html>

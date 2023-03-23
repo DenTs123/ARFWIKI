@@ -1,0 +1,12 @@
+{% extends "blog/base.html" %}
+
+{% block title %}ARF WIKI{% endblock %}
+{% block content %}
+<h1>ARF WIKI</h1>
+<div>
+    <h2>ARF WIKI - Это крутая википедия о футболистах где можно узнать информацию о любом игроке<br>
+    Можешь использовать <a href="{% url 'blog:post_search' %}">поиск</a> чтобы найти его<br>
+    Заходи на страницу постов и ныряй в мир футбола</h2>
+    <button class="start"><a href="{% url 'blog:post_list' %}">Начать</a></button>
+</div>
+{% endblock content %}
